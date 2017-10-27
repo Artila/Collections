@@ -1,6 +1,5 @@
 ### jQuery基础——DOM篇
 
-[TOC]
 
 ###2 DOM节点的创建
 
