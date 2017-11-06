@@ -158,40 +158,359 @@ json设置从服务器获取数据的类型，所以得到的数据格式为json
 
 
 
-#### 1-7
+#### 1-7 使用ajax()方法加载服务器数据
 
-#### 1-8
+使用`ajax()`方法是最底层、功能最强大的请求服务器数据的方法，它不仅可以获取服务器返回的数据，还能向服务器发送请求并传递数值，它的调用格式如下：
 
-#### 1-9
+`jQuery.ajax([settings])`**或**`$.ajax([settings])`
+
+其中参数settings为发送ajax请求时的配置对象，在该对象中，url表示服务器请求的路径，data为请求时传递的数据，dataType为服务器返回的数据类型，success为请求成功的执行的回调函数，type为发送数据请求的方式，默认为get。
+
+例如，点击页面中的“加载”按钮，调用`ajax()`方法向服务器请求加载一个txt文件，并将返回的文件中的内容显示在页面，如下图所示：
+
+[![img](http://img.mukewang.com/52dcdb5000014e9804600419.jpg)](http://img.mukewang.com/52dcdb5000014e9804600419.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52dcdb6b00010eea05990345.jpg)](http://img.mukewang.com/52dcdb6b00010eea05990345.jpg)
+
+从图中可以看出，当点击“加载”按钮时，调用`$.ajax()`方法请求服务器中txt文件，当请求成功时调用success回调函数，获取传回的数据，并显示在页面中。
+
+```
+默认的请求方式是GET，但是这里一定注意type：“post”意味着就是POST请求方式，这样它代表的就是提交数据给指定的服务器处理；type：“get”意味着就是GET请求方式，这样它代表的就是从指定的服务器中获取数据（不处理），就像本节的范例，就是只获取数据并不处理数据，而下面图片中的代码是需要处理的，也就是提交一个数据（或偶数或奇数），交予服务器端封装的函数来处理，处理完成后再返回是偶数或奇数。
+```
+
+
+
+#### 1-8 使用ajaxSetup()方法设置全局Ajax默认选项
+
+使用`ajaxSetup()`方法可以设置Ajax请求的一些全局性选项值，设置完成后，后面的Ajax请求将不需要再添加这些选项值，它的调用格式为：
+
+`jQuery.ajaxSetup([options])`**或**`$.ajaxSetup([options])`
+
+可选项options参数为一个对象，通过该对象设置Ajax请求时的全局选项值。
+
+例如，先调用`ajaxSetup()`方法设置全局的Ajax选项值，再点击两个按钮，分别使用`ajax()`方法请求不同的服务器数据，并将数据内容显示在页面，如下图所示：
+
+[![img](http://img.mukewang.com/52dcdce60001de2604780449.jpg)](http://img.mukewang.com/52dcdce60001de2604780449.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52dcdd090001ccfd06390382.jpg)](http://img.mukewang.com/52dcdd090001ccfd06390382.jpg)
+
+从图中可以看出，使用`ajaxSetup()`方法设置了Ajax请求时的一些全局性的配置选项后，在两次调用ajax请求服务器txt文件时，只需要设置url地址即可。
+
+
+
+#### 1-9 使用ajaxStart()和ajaxStop()方法
+
+`ajaxStart()`和`ajaxStop()`方法是绑定Ajax事件。ajaxStart()方法用于在Ajax请求发出前触发函数，ajaxStop()方法用于在Ajax请求完成后触发函数。它们的调用格式为：
+
+`$(selector).ajaxStart(function())`**和**`$(selector).ajaxStop(function())`
+
+其中，两个方法中括号都是绑定的函数，当发送Ajax请求前执行`ajaxStart()`方法绑定的函数，请求成功后，执行ajaxStop ()方法绑定的函数。
+
+例如，在调用`ajax()`方法请求服务器数据前，使用动画显示正在加载中，当请求成功后，该动画自动隐藏，如下图所示：
+
+[![img](http://img.mukewang.com/52dcfb3a0001746d06020435.jpg)](http://img.mukewang.com/52dcfb3a0001746d06020435.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52dcfb5500013ffa06500337.jpg)](http://img.mukewang.com/52dcfb5500013ffa06500337.jpg)
+
+从图中可以看出，由于使用`ajaxStart()`和`ajaxStop()`方法绑定了动画元素，因此，在开始发送Ajax请求时，元素显示，请求完成时，动画元素自动隐藏。
+
+注意：该方法在1.8.2下使用是正常的
 
 
 
 ### 2  jQuery 常用插件
 
-#### 2-1
+#### 2-1 表单验证插件——validate
 
-#### 2-2 
+该插件自带包含必填、数字、URL在内容的验证规则，即时显示异常信息，此外，还允许自定义验证规则，插件调用方法如下：
 
-#### 2-3 
+`$(form).validate({options})`
 
-#### 2-4  
+其中form参数表示表单元素名称，options参数表示调用方法时的配置对象，所有的验证规则和异常信息显示的位置都在该对象中进行设置。
 
-#### 2-5
+例如，当点击表单中的“提交”按钮时，调用validate插件验证用户名输入是否符合规则，并将异常信息显示在页面中，如下图所示：
 
-#### 2-6
+[![img](http://img.mukewang.com/52e474e70001b2cc04780576.jpg)](http://img.mukewang.com/52e474e70001b2cc04780576.jpg)
 
-#### 2-7
+在浏览器中显示的效果：
 
-#### 2-8
+[![img](http://img.mukewang.com/55ffc1b80001518c06010355.jpg)](http://img.mukewang.com/55ffc1b80001518c06010355.jpg)
 
-#### 2-9
+从图中可以看出，在页面中导入了validate插件，当用户在输入框中录入用户名时，自动根据规则进入验证，并显示提示信息，验证成功后，表单才能提交。
+
+```
+注意：ruels:里面的那个email是表单控件的name，不是ID，它是根据name属性绑定元素节点
+
+参数
+required:true 必须有值，不能为空
+remote:url 可以用于判断用户名等是否已经存在,服务器端输出true,表示验证通过
+minlength:6 最小长度为6
+maxlength:16 最大长度为16
+rangelength:长度范围
+range:[10,20] 数值范围在10-20之间
+email:true 验证邮件
+url:true 验证URL网址
+dateISO:true 验证日期格式'yyyy-mm-dd'
+digits:true 只能为数字
+accept:'gif|jpg' 只接受gif或jpg为后缀的图片。常用于验证文件的扩展名
+equalTo:'#pass' 与哪个表单字段的值相等，常用于验证重复输入密码
+```
+
+
+
+#### 2-2 表单插件——form 
+
+通过表单form插件，调用`ajaxForm()`方法，实现ajax方式向服务器提交表单数据，并通过方法中的options对象获取服务器返回数据，调用格式如下：
+
+`$(form). ajaxForm ({options})`
+
+其中form参数表示表单元素名称；options是一个配置对象，用于在发送ajax请求过程，设置发送时的数据和参数。
+
+例如，在页面中点击“提交”按钮，调用form插件的
+`ajaxForm()`方法向服务器发送录入的用户名和密码数据，服务器接收后返回并显示在页面中，如下图所示：
+
+[![img](http://img.mukewang.com/52e4861d000143ad04720449.jpg)](http://img.mukewang.com/52e4861d000143ad04720449.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4863b0001b62e07360383.jpg)](http://img.mukewang.com/52e4863b0001b62e07360383.jpg)
+
+从图中可以看出，当点击“提交”按钮时，调用form表单插件中的ajaxForm()方法向指定的服务器以ajax方式发送数据，服务器接收后返回并将数据显示。
+
+
+
+#### 2-3 图片灯箱插件——lightBox 
+
+该插件可以用圆角的方式展示选择中的图片，使用按钮查看上下张图片，在加载图片时自带进度条，还能以自动播放的方式浏览图片，调用格式如下：
+
+`$(linkimage).lightBox({options})`
+
+其中linkimage参数为包含图片的<a>元素名称，options为插件方法的配置对象。
+
+例如，以列表的方式在页面中展示全部的图片，当用户单击其中某张图片时，通过引入的图片插件，采用“灯箱”的方式显示所选的图片，如下图所示：
+
+[![img](http://img.mukewang.com/52e488760001d36c05070495.jpg)](http://img.mukewang.com/52e488760001d36c05070495.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4889600013b1107220457.jpg)](http://img.mukewang.com/52e4889600013b1107220457.jpg)
+
+从图中可以看出，当用户点击“我的相册”中某一张图片时，则采用“灯箱”的方式显示选中图片，在显示图片时，还可以切换上下张和自动播放及关闭图片。
+
+
+
+#### 2-4 图片放大镜插件——jqzoom  
+
+在调用jqzoom图片放大镜插件时，需要准备一大一小两张一样的图片，在页面中显示小图片，当鼠标在小图片中移动时，调用该插件的`jqzoom()`方法，显示与小图片相同的大图片区域，从而实现放大镜的效果，调用格式如下：
+
+`$(linkimage).jqzoom({options})`
+
+其中linkimage参数为包含图片的<a>元素名称，options为插件方法的配置对象。
+
+例如，在页面中，添加一个被<a>元素包含的图片元素，当在图片元素中移动鼠标时，在图片的右边，将显示放大后的所选区域效果，如下图所示：
+
+[![img](http://img.mukewang.com/52e49c2500014a9b04630338.jpg)](http://img.mukewang.com/52e49c2500014a9b04630338.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e49c43000157d205720384.jpg)](http://img.mukewang.com/52e49c43000157d205720384.jpg)
+
+从图中可以看出，当在小图片中移动鼠标时，将调用放大镜插件的`jqzoom()`方法，在图片的右侧显示与小图片所选区域相同的放大区域，实现放大镜的效果。
+
+
+
+#### 2-5 cookie插件——cookie
+
+使用cookie插件后，可以很方便地通过cookie对象保存、读取、删除用户的信息，还能通过cookie插件保存用户的浏览记录，它的调用格式为：
+
+**保存：**`$.cookie(key，value)`**；读取：**`$.cookie(key)`**，删除：**`$.cookie(key，null)`
+
+其中参数key为保存cookie对象的名称，value为名称对应的cookie值。
+
+例如，当点击“设置”按钮时，如果是“否保存用户名”的复选框为选中状态时，则使用cookie对象保存用户名，否则，删除保存的cookie用户名，如下图所示：
+
+[![img](http://img.mukewang.com/52e49d8100016e2c06280481.jpg)](http://img.mukewang.com/52e49d8100016e2c06280481.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e49db900011a7706060340.jpg)](http://img.mukewang.com/52e49db900011a7706060340.jpg)
+
+从图中可以看出，由于在点击“设置”按钮时，选择了保存用户名，因此，输入框中的值被cookie保存，下次打开浏览器时，直接获取并显示保存的cookie值。
+
+```
+expires:　　有限日期，可以是一个整数或一个日期(单位：天)。　　
+　          这个地方也要注意，如果不设置这个东西，浏览器关闭之后此cookie就失效了
+path:　　　 cookie值保存的路径，默认与创建页路径一致。
+domin:　　  cookie域名属性，默认与创建页域名一样。　　
+            这个地方要相当注意，跨域的概念，如果要主域名二级域名有效则要设置　　".xxx.com"
+secrue:　　 一个布尔值，表示传输cookie值时，是否需要一个安全协议。
+```
+
+
+
+#### 2-6 搜索插件——autocomplete
+
+搜索插件的功能是通过插件的`autocomplete()`方法与文本框相绑定，当文本框输入字符时，绑定后的插件将返回与字符相近的字符串提示选择，调用格式如下：
+
+`$(textbox).autocomplete(urlData,[options]);`
+
+其中，textbox参数为文本框元素名称，urlData为插件返回的相近字符串数据，可选项参数options为调用插件方法时的配置对象。
+
+例如，当用户在文本框输入内容时，调用搜索插件的`autocomplete()`方法返回与输入内容相匹配的字符串数据，显示在文本框下，提示选择，如下图所示：
+
+[![img](http://img.mukewang.com/52e49eb90001024606410464.jpg)](http://img.mukewang.com/52e49eb90001024606410464.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e49ed2000183f806300354.jpg)](http://img.mukewang.com/52e49ed2000183f806300354.jpg)
+
+从图中可以看出，当文本框与搜索插件相绑定后，输入任意字符时，都将返回与之相匹配的字符串，提示用户选择，文本框在空白双击时，显示全部提示信息。
+
+```
+minChars (Number) 
+在触发autoComplete前用户至少需要输入的字符数，Default:1，如果设为0，在输入框内双击或者删除输入框内内容时显示列表。 
+
+max (Number):autocomplete
+下拉显示项目的个数，Default: 10.
+
+ formatItem (Function) 
+为每个要显示的项目使用高级标签.即对结果中的每一行都会调用这个函数,返回值将用LI元素包含显示在下拉列表中.Autocompleter会提供三个参数(row, i, max): 返回的结果数组, 当前处理的行数(即第几个项目,是从1开始的自然数), 当前结果数组元素的个数即项目的个数.Default: none, 表示不指定自定义的处理函数,这样下拉列表中的每一行只包含一个值. 
+
+ formatResult (Function) 
+和formatItem类似,但可以将将要输入到input文本框内的值进行格式化.同样有三个参数,和formatItem一样.Default: none,表示要么是只有数据,要么是使用formatItem提供的值.
+```
+
+
+
+#### 2-7 右键菜单插件——contextmenu
+
+右键菜单插件可以绑定页面中的任意元素，绑定后，选中元素，点击右键，便通过该插件弹出一个快捷菜单，点击菜单各项名称执行相应操作，调用代码如下：
+
+`$(selector).contextMenu(menuId,{options});`
+
+Selector参数为绑定插件的元素，meunId为快捷菜单元素，options为配置对象。
+
+例如，选中页面<textarea>元素，点击右键，弹出插件绑定的快捷菜单，点击菜单中的各个选项，便在页面中显示操作的对应名称。如下图所示：
+
+[![img](http://img.mukewang.com/52e49fde0001919605370483.jpg)](http://img.mukewang.com/52e49fde0001919605370483.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e49ff80001ed4f06910367.jpg)](http://img.mukewang.com/52e49ff80001ed4f06910367.jpg)
+
+从图中可以看出，当文本框与右键菜单通过插件`contextmenu()`方法绑定后，选中文本框，点击右键时，弹出快捷菜单，点击“新建”选项时，显示操作对应内容。
+
+
+
+#### 2-8 自定义对象级插件——lifocuscolor插件
+
+自定义的lifocuscolor插件可以在<ul>元素中，鼠标在表项<li>元素移动时，自定义其获取焦点时的背景色，即定义<li>元素选中时的背景色，调用格式为：
+
+`$(Id).focusColor(color)`
+
+其中，参数Id表示<ul>元素的Id号，color表示<li>元素选中时的背景色。
+
+例如，在页面中，调用自定义的lifocuscolor插件，自定义<li>元素选中时的背景色，如下图所示：
+
+[![img](http://img.mukewang.com/52e4a100000199ac04200306.jpg)](http://img.mukewang.com/52e4a100000199ac04200306.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4a11d0001669107090375.jpg)](http://img.mukewang.com/52e4a11d0001669107090375.jpg)
+
+从图中可以看出，当<ul>元素调用`focusColor()`方法绑定自定义的插件之后，当鼠标在<li>元素间移动时，显示自定义的背景色。
+
+
+
+#### 2-9 自定义类级别插件—— twoaddresult
+
+通过调用自定义插件twoaddresult中的不同方法，可以实现对两个数值进行相加和相减的运算，导入插件后，调用格式分别为：
+
+`$.addNum(p1,p2) `**和**` $.subNum(p1,p2)`
+
+上述调用格式分别为计算两数值相加和相减的结果，p1和p2为任意数值。
+
+例如，在页面的两个文本框中输入任意数值，点击“计算”按钮调用自定义插件中`$.addNum()`方法，计算两数值的和并将结果显示在另一文本框中，如下图所示：
+
+[![img](http://img.mukewang.com/52e4a2230001185304660432.jpg)](http://img.mukewang.com/52e4a2230001185304660432.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4a23c0001c1cb06890362.jpg)](http://img.mukewang.com/52e4a23c0001c1cb06890362.jpg)
+
+从图中可以看出，当点击“计算”按钮时，调用了自定义插件中的`$.addNum()`方法计算两个文本框中输入数值的和，并将该值显示在另一文本框中。
+
+```
+jQuery为开发插件提拱了两个方法，分别是：
+
+1. jQuery.extend();
+它是为jQuery类添加类方法，可以理解为添加静态方法。如：
+
+jQuery.extend({
+
+　　min: function(a, b) { return a < b ? a : b; },
+
+　　max: function(a, b) { return a > b ? a : b; }
+
+});
+
+jQuery.min(2,3); //  2 
+jQuery.max(4,5); //  5
+
+2. jQuery.fn.extend();
+$.fn是指jQuery的命名空间，fn上的成员(方法function及属性property)，会对jQuery实例每一个有效。
+```
+
+
 
 
 ### 3  jQuery UI型插件
 
-#### 3-1
+#### 3-1 拖曳插件——draggable
 
-#### 3-2 
+拖曳插件draggable的功能是拖动被绑定的元素，当这个jQuery UI插件与元素绑定后，可以通过调用`draggable()`方法，实现各种拖曳元素的效果，调用格式如下：
+
+`$(selector). draggable({options})`
+
+options参数为方法调用时的配置对象，根据该对象可以设置各种拖曳效果，如“containment”属性指定拖曳区域，“axis”属性设置拖曳时的坐标方向。
+
+例如，在页面中的<div>元素中添加两个子类<div>，通过与拖曳插件绑定，这两个子类<div>元素只能在外层的父<div>元素中任意拖曳，如下图所示：
+
+[![img](http://img.mukewang.com/52e4b50c0001545304260177.jpg)](http://img.mukewang.com/52e4b50c0001545304260177.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4b5240001794706620379.jpg)](http://img.mukewang.com/52e4b5240001794706620379.jpg)
+
+从图中可以看出，由于使用jQuery UI插件draggable绑定了两个子类<div>元素，并将配置对象的“containment”属性值设为“parent”，因此，这两个子类<div>元素只能在外层的父框中实现任意拖曳。
+
+
+
+#### 3-2 放置插件——droppable 
+
+除使用draggable插件拖曳任意元素外，还可以调用droppable UI插件将拖曳后的任意元素放置在指定区域中，类似购物车效果，调用格式如下：
+
+`**$(selector).droppable({options})**`
+
+selector参数为接收拖曳元素，options为方法的配置对象，在对象中，drop函数表示当被接收的拖曳元素完全进入接收元素的容器时，触发该函数的调用。
+
+例如，在页面中，通过调用droppable插件将“产品区”中的元素拖曳至“购物车”中，同时改变“购物车”的背景色和数量值，如下图所示：
+
+[![img](http://img.mukewang.com/52e4b7e000012af004800447.jpg)](http://img.mukewang.com/52e4b7e000012af004800447.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4b7fa0001435707090448.jpg)](http://img.mukewang.com/52e4b7fa0001435707090448.jpg)
+
+从图中可以看出，先调用draggable插件任意拖曳“产品区”的元素，然后，调用droppable插件绑定“购物车”中接收元素，当“产品区”元素完全拖曳至“购物车”时，触发定义的drop函数，改变“购物车”中背景色和总数量值。
+
+
 
 #### 3-3 
 
