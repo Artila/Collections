@@ -496,7 +496,7 @@ options参数为方法调用时的配置对象，根据该对象可以设置各�
 
 除使用draggable插件拖曳任意元素外，还可以调用droppable UI插件将拖曳后的任意元素放置在指定区域中，类似购物车效果，调用格式如下：
 
-`**$(selector).droppable({options})**`
+`$(selector).droppable({options})`
 
 selector参数为接收拖曳元素，options为方法的配置对象，在对象中，drop函数表示当被接收的拖曳元素完全进入接收元素的容器时，触发该函数的调用。
 
@@ -512,37 +512,328 @@ selector参数为接收拖曳元素，options为方法的配置对象，在对�
 
 
 
-#### 3-3 
+#### 3-3 拖曳排序插件——sortable 
 
-#### 3-4  
+拖曳排序插件的功能是将序列元素（例如<option>、<li>）按任意位置进行拖曳从而形成一个新的元素序列，实现拖曳排序的功能，它的调用格式为：
 
-#### 3-5
+`$(selector).sortable({options});`
 
-#### 3-6
+selector参数为进行拖曳排序的元素，options为调用方法时的配置对象，
 
-#### 3-7
+例如，在页面中，通过加载sortable插件将<ul>元素中的各个<li>表项实现拖曳排序的功能，如下图所示：
 
-#### 3-8
+[![img](http://img.mukewang.com/52e4bb9b0001075303890385.jpg)](http://img.mukewang.com/52e4bb9b0001075303890385.jpg)
 
-#### 3-9
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4bbb60001ae1606600393.jpg)](http://img.mukewang.com/52e4bbb60001ae1606600393.jpg)
+
+从图中可以看出，由于使用sortable插件绑定了<ul>元素，并设置了拖曳时的透明度，因此，<ul>中的各个<li>元素则能指定的透明度进行任意的拖曳排序。
+
+
+
+#### 3-4 面板折叠插件——accordion  
+
+面板折叠插件可以实现页面中指定区域类似“手风琴”的折叠效果，即点击标题时展开内容，再点另一标题时，关闭已展开的内容，调用格式如下：
+
+`$(selector).accordion({options});`
+
+其中，参数selector为整个面板元素，options参数为方法对应的配置对象。
+
+例如，通过accordion插件展示几个相同区域面板的折叠效果，如下图所示：
+
+[![img](http://img.mukewang.com/52e4bd2c0001e58b03680467.jpg)](http://img.mukewang.com/52e4bd2c0001e58b03680467.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4bd4a0001b4ea06500371.jpg)](http://img.mukewang.com/52e4bd4a0001b4ea06500371.jpg)
+
+从图中可以看出，由于绑定了折叠面板插件，默认为第一个面板的内容为展示状态，点击第二个面板主题时，展示主题对应内容，同时关闭上一个面板内容。
+
+
+
+#### 3-5 选项卡插件——tabs
+
+使用选项卡插件可以将<ul>中的<li>选项定义为选项标题，在标题中，再使用<a>元素的“href”属性设置选项标题对应的内容，它的调用格式如下：
+
+`$(selector).tabs({options});`
+
+selector参数为选项卡整体外围元素，该元素包含选项卡标题与内容，options参数为`tabs()`方法的配置对象，通过该对象还能以ajax方式加载选项卡的内容。
+
+例如，在页面中，添加选项卡的标题和内容元素，并绑定tabs插件，当点击标题时，以选项卡的方式切内容，如下图所示：
+
+[![img](http://img.mukewang.com/52e4bea70001795c04470526.jpg)](http://img.mukewang.com/52e4bea70001795c04470526.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4bec4000174c706760344.jpg)](http://img.mukewang.com/52e4bec4000174c706760344.jpg)
+
+从图中可以看出，在`tabs()`方法的配置对象中，通过“fx”属性设置了选项卡切换时的效果，“event”属性设置鼠标也可以切换选项卡，因此，当鼠标在移动至两个选项卡标题时，对应内容以动画的效果自动切换。
+
+
+
+#### 3-6 对话框插件——dialog
+
+对话框插件可以用动画的效果弹出多种类型的对话框，实现JavaScript代码中`alert()`和`confirm()`函数的功能，它的调用格式为：
+
+`$(selector).dialog({options});`
+
+selector参数为显示弹出对话框的元素，通常为<div>，options参数为方法的配置对象，在对象中可以设置对话框类型、“确定”、“取消”按钮执行的代码等。
+
+例如，当点击“提交”按钮时，如果文本框中的内容为空，则通过dialog插件弹出提示框，提示输入内容不能为空，如下图所示：
+
+[![img](http://img.mukewang.com/52e4c1370001b0e805150562.jpg)](http://img.mukewang.com/52e4c1370001b0e805150562.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4c150000111de05350338.jpg)](http://img.mukewang.com/52e4c150000111de05350338.jpg)
+
+从图中可以看出，当文本框的内容为空时，调用自定义的sys_Alert函数，在该函数中再调用dialog插件的`dialog()`方法，弹出带模式的显示信息对话框。
+
+
+
+#### 3-7 菜单工具插件——menu
+
+菜单工具插件可以通过<ul>创建多级内联或弹出式菜单，支持通过键盘方向键控制菜单滑动，允许为菜单的各个选项添加图标，调用格式如下：
+
+`$(selector).menu({options});`
+
+selector参数为菜单列表中最外层<ul>元素，options为`menu()`方法的配置对象。
+
+例如，在页面中，通过<ul>元素内联的方式构建一个三层结构的导航菜单，并将最外层<ul>元素通过`menu()`方法绑定插件，实现导航菜单的功能，如下图所示：
+
+[![img](http://img.mukewang.com/52e4c2c10001b1a705160466.jpg)](http://img.mukewang.com/52e4c2c10001b1a705160466.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4c2dd0001b82505350338.jpg)](http://img.mukewang.com/52e4c2dd0001b82505350338.jpg)
+
+从图中可以看出，通过<ul>内嵌的方式，构建一个三层结构的导航菜单，将<li>元素的class属性值设为“ui-state-disabled”，可将菜单选项置为不可用状态。
+
+
+
+#### 3-8 微调按钮插件——spinner
+
+微调按钮插件不仅能在文本框中直接输入数值，还可以通过点击输入框右侧的上下按钮修改输入框的值，还支持键盘的上下方向键改变输入值，调用格式如下：
+
+`$(selector).spinner({options});`
+
+selector参数为文本输入框元素，可选项options参数为`spinner()`方法的配置对象，在该对象中，可以设置输入的最大、最小值，获取改变值和设置对应事件。
+
+例如，将页面中的三个输入文本框都与微调插件相绑定，当改变三个文本框值时，对应的<div>元素的背景色也将随之发生变化，如下图所示：
+
+[![img](http://img.mukewang.com/52e4c4ad0001d4e007610813.jpg)](http://img.mukewang.com/52e4c4ad0001d4e007610813.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4c4c70001205f05430305.jpg)](http://img.mukewang.com/52e4c4c70001205f05430305.jpg)
+
+从图中可以看出，由于三个文本框输入元素都绑定微调插件，因此，无论是点击右侧的上下按钮，还是直接在文本框中输入值，都可以改变<div>元素的背景色。
+
+
+
+#### 3-9 工具提示插件——tooltip
+
+工具提示插件可以定制元素的提示外观，提示内容支持变量、Ajax远程获取，还可以自定义提示内容显示的位置，它的调用格式如下：
+
+`$(selector).tooltip({options})`
+
+其中selector为需要显示提示信息的元素，可选项参数options为`tooltip()`方法的配置对象，在该对象中，可以设置提示信息的弹出、隐藏时的效果和所在位置。
+
+例如，将三个<a>元素与工具提示插件相绑定，当把鼠标移动在<a>元素内容时，以动画效果弹出对应的提示图片，移出时，图片自动隐藏，如下图所示：
+
+[![img](http://img.mukewang.com/52e4c6360001f38506900450.jpg)](http://img.mukewang.com/52e4c6360001f38506900450.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4c6530001236e05960553.jpg)](http://img.mukewang.com/52e4c6530001236e05960553.jpg)
+
+从图中可以看出，由于各个<a>元素都绑定了工具提示插件，因此，将在指定的位置并以动画效果展示各个<a>元素中title属性所对应的内容。
+
+
 
 
 ### 4  jQuery 工具类函数
 
-#### 4-1
+#### 4-1 获取浏览器的名称与版本信息
 
-#### 4-2 
+在jQuery中，通过`$.browser`对象可以获取浏览器的名称和版本信息，如`$.browser.chrome`为true，表示当前为Chrome浏览器，`$.browser.mozilla`为true，表示当前为火狐浏览器，还可以通过`$.browser.version`方式获取浏览器版本信息。
 
-#### 4-3 
+例如，调用$.browser对象，获取浏览器名称并显示在页面中，如下图所示：
 
-#### 4-4  
+[![img](http://img.mukewang.com/52e4cf7f0001d48b03770322.jpg)](http://img.mukewang.com/52e4cf7f0001d48b03770322.jpg)
 
-#### 4-5
+在浏览器中显示的效果：
 
-#### 4-6
+[![img](http://img.mukewang.com/52e4cf9800015ac505710448.jpg)](http://img.mukewang.com/52e4cf9800015ac505710448.jpg)
 
-#### 4-7
+从图中可以看出，通过调用`$.browser`对象，检测当前浏览器的所属类型，并根据类型不同，将浏览器名称保存至变量中，最后将变量的内容显示在页面中。
 
-#### 4-8
+> 已在jQuery1.9中被移除，因为识别方法不准确。
 
-#### 4-9
+
+
+#### 4-2 检测浏览器是否属于W3C盒子模型 
+
+浏览器的盒子模型分为两类，一类为标准的w3c盒子模型，另一类为IE盒子模型，两者区别为在Width和Height这两个属性值中是否包含padding和border的值，w3c盒子模型不包含，IE盒子模型则包含，而在jQuery 中，可以通过`$.support.boxModel`对象返回的值，检测浏览器是否属于标准的w3c盒子模型。
+
+例如，根据页面的特征，并通过`$.support.boxModel`属性的返回值，显示当前浏览器是否属于标准的w3c盒子模型，如下图所示：
+
+[![img](http://img.mukewang.com/52e4d0e30001a31d03850323.jpg)](http://img.mukewang.com/52e4d0e30001a31d03850323.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4d0fa0001a4b704360230.jpg)](http://img.mukewang.com/52e4d0fa0001a4b704360230.jpg)
+
+从图中可以看出，由于打开的页面属于标准的w3c盒子模型，因此，在调用`$.support.boxModel`属性时，返回true值。
+
+> jq1.8中被移除
+
+
+
+#### 4-3 检测对象是否为空 
+
+在jQuery中，可以调用名为`$.isEmptyObject`的工具函数，检测一个对象的内容是否为空，如果为空，则该函数返回true，否则，返回false值，调用格式如下：
+
+`$.isEmptyObject(obj);`
+
+其中，参数obj表示需要检测的对象名称。
+
+例如，通过`$.isEmptyObject()`函数，检测某个指定的对象是否为空，并将结果显示在页面中，如下图所示：
+
+[![img](http://img.mukewang.com/52e4d28b0001b06c03810337.jpg)](http://img.mukewang.com/52e4d28b0001b06c03810337.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4d2a600014b6604360230.jpg)](http://img.mukewang.com/52e4d2a600014b6604360230.jpg)
+
+从图中可以看出，由于对象obj的内容为空，因此，`$.isEmptyObject()`函数检测obj时，返回true，并根据返回的true值在页面中显示对应的文字内容。
+
+
+
+#### 4-4 检测对象是否为原始对象  
+
+调用名为`$.isPlainObject`的工具函数，能检测对象是否为通过`{}`或`new Object()`关键字创建的原始对象，如果是，返回true，否则，返回false值，调用格式为：
+
+`$.isPlainObject (obj);`
+
+其中，参数obj表示需要检测的对象名称。
+
+例如，通过`$.isPlainObject()`函数，检测某个指定的对象是否为原始，并将结果显示在页面中，如下图所示：
+
+[![img](http://img.mukewang.com/52e4d3be0001f46806190354.jpg)](http://img.mukewang.com/52e4d3be0001f46806190354.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4d3d500013c5004400241.jpg)](http://img.mukewang.com/52e4d3d500013c5004400241.jpg)
+
+从图中可以看出，由于自定义的obj_a和obj_b都是属于原始对象，因此，当调用`$.isPlainObject()`函数检测这两个对象时，都返回true值。
+
+
+
+#### 4-5 检测两个节点的包含关系
+
+调用名为`$.contains`的工具函数，能检测在一个DOM节点中是否包含另外一个DOM节点，如果包含，返回true，否则，返回false值，调用格式为：
+
+`$.contains (container, contained);`
+
+参数container表示一个DOM对象节点元素，用于包含其他节点的容器，contained是另一个DOM对象节点元素，用于被其他容器所包含。
+
+例如，通过`$.contains()`函数，检测两个节点对象间是否存在包含关系，并将检测的结果显示在页面中，如下图所示：
+
+[![img](http://img.mukewang.com/52e4d5fb000122c104540369.jpg)](http://img.mukewang.com/52e4d5fb000122c104540369.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4d61a0001923f05080306.jpg)](http://img.mukewang.com/52e4d61a0001923f05080306.jpg)
+
+从图中可以看出，`documentElement`是DOM根结点，而body只是根结点下的子节点之一，它们之间存在包含关系，因此，返回true值，并显示“包含”字样。
+
+
+
+#### 4-6 字符串操作函数
+
+调用名为`$.trim`的工具函数，能删除字符串中左右两边的空格符，但该函数不能删除字符串中间的空格，调用格式为：
+
+`$.trim (str);`
+
+参数str表示需要删除左右两边空格符的字符串。
+
+例如，通过`$.trim()`函数，除掉一个两边均有空格符的字符串，并将其执行前后的字符长度都显示在页面中，如下图所示：
+
+[![img](http://img.mukewang.com/52e4d72d0001a3c005630480.jpg)](http://img.mukewang.com/52e4d72d0001a3c005630480.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4d7470001abd205040320.jpg)](http://img.mukewang.com/52e4d7470001abd205040320.jpg)
+
+从图中可以看出，由于文本框中的字符串前后分别有一个空格字符，因此，它的字符长度为13，调用`trim()`函数删除字符串前后空格之后，字符串长度则变为11。
+
+
+
+#### 4-7 URL操作函数
+
+调用名为`$.param`的工具函数，能使对象或数组按照`key/value`格式进行序列化编码，该编码后的值常用于向服务端发送URL请求，调用格式为：
+
+`$.param (obj);`
+
+参数obj表示需要进行序列化的对象，该对象也可以是一个数组，整个函数返回一个经过序列化编码后的字符串。
+
+例如，通过`$.param()`函数，对指定的对象进行序列化编码，使其成为可执行传值的URL地址，并将该地址显示在页面中，如下图所示：
+
+[![img](http://img.mukewang.com/52e4d8a6000185af04750370.jpg)](http://img.mukewang.com/52e4d8a6000185af04750370.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4d8c00001965504850276.jpg)](http://img.mukewang.com/52e4d8c00001965504850276.jpg)
+
+从图中可以看出，通过调用工具函数`$.param()`可以将一个对象进行序列化并编码成可以在地址栏中直接执行的URL字符串。
+
+param和serialize的区别是什么？前者是对任意的参数进行URL地址格式的转换，而后者仅属于form提交的数据转换。
+
+```
+.serialize()方法可以将表单中有name属性的元素值进行序列化，生成标准URL编码文本字符串，直接可用于ajax请求
+
+$.param() 序列化对象或者数组,常用于向服务端发送URL请求
+```
+
+
+
+#### 4-8 使用$.extend()扩展工具函数
+
+调用名为`$. extend`的工具函数，可以对原有的工具函数进行扩展，自定义类级别的jQuery插件，调用格式为：
+
+`$.extend ({options});`
+
+参数options表示自定义插件的函数内容。
+
+例如，调用`$.extend()`函数，自定义一个用于返回两个数中最大值的插件，并在页面中将插件返回的最大值显示在页面中，如下图所示：
+
+[![img](http://img.mukewang.com/52e4d9d30001eb7305670594.jpg)](http://img.mukewang.com/52e4d9d30001eb7305670594.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4d9ee0001aad904820268.jpg)](http://img.mukewang.com/52e4d9ee0001aad904820268.jpg)
+
+从图中可以看出，当点击“计算”按钮时，先调用自定义插件中名为“MaxNum”的方法，计算并返回两个数值中的最大值，然后，将该值显示在页面中。
+
+
+
+#### 4-9 使用$.extend()扩展Object对象
+
+除使用`$.extend`扩展工具函数外，还可以扩展原有的`Object`对象，在扩展对象时，两个对象将进行合并，当存在相同属性名时，后者将覆盖前者，调用格式为：
+
+`$.extend (obj1,obj2,…objN);`
+
+参数obj1至objN表示需要合并的各个原有对象。
+
+例如，调用`$.extend()`函数对两个已有的对象进行合并，并将合并后的新对象元素内容显示在页面中，如下图所示：
+
+[![img](http://img.mukewang.com/52e4dbff0001c35405140338.jpg)](http://img.mukewang.com/52e4dbff0001c35405140338.jpg)
+
+在浏览器中显示的效果：
+
+[![img](http://img.mukewang.com/52e4dc1800012ce104770270.jpg)](http://img.mukewang.com/52e4dc1800012ce104770270.jpg)
+
+从图中可以看出，当两个对象通过`$.extend()`函数扩展合并后，返回一个包含两个对象中全部属性元素的新对象，相同名称的“name”属性，前者被后者覆盖。
+
