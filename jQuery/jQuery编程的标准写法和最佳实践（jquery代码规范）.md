@@ -34,6 +34,7 @@
 
 
 
+
 ## 关于变量
 
 1. jQuery 类型的变量最好加个$前缀。
@@ -45,6 +46,7 @@ $myDiv.click(function(){...});
 ```
 
 3. 使用 [camel case](http://en.wikipedia.org/wiki/CamelCase)命名
+
 
 
 
@@ -313,6 +315,7 @@ jqxhr.fail(failureHandler);
 
 
 
+
 ## 链式结构
 
 1. 除了用变量将jQuery选择器返回的结果保存，还可以利用好链式调用。
@@ -332,6 +335,7 @@ $("#myLink")
 ```
 
 3. 对于特别长的调用最好还是用变量保存下中间结果来简化代码。
+
 
 
 

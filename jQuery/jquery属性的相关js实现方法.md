@@ -913,10 +913,10 @@ fetch(url, {
 ## JSON
 
 ```javascript
-    //JQUERY
-    $.getJSON('/my/url', function(data) {
+//JQUERY
+$.getJSON('/my/url', function(data) {
 
-    });
+});
 
 //谷歌浏览器，火狐浏览器，IE8+
 var request = new XMLHttpRequest();
